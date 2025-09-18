@@ -1,5 +1,5 @@
 require("user.options")
 require("user.colorscheme")
-require("user.keymap")
+require("user.keybinds")
 require("user.lsp")
 require("user.diagnostics")

@@ -1,1 +1,3 @@
-vim.lsp.enable('lua')
+vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
+
+vim.lsp.enable("lua")

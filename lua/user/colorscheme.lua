@@ -1,5 +1,5 @@
 vim.o.background = "light"
 require("everforest").setup({
-	background = "soft",
+  background = "soft",
 })
 vim.cmd("colorscheme everforest")

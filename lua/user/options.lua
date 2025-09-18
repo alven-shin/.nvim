@@ -1,8 +1,12 @@
+-- general options
+--
+-- lsp-specific options are defined in lsp.lua
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
@@ -12,7 +16,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -23,11 +27,11 @@ vim.o.undofile = true
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
 vim.o.smartcase = true
-vim.o.incsearch = true            -- search as characters are entered
-vim.o.hlsearch = true             -- do not highlight matches
+vim.o.incsearch = true -- search as characters are entered
+vim.o.hlsearch = true -- highlight matches
 
 -- Keep signcolumn on by default
-vim.o.signcolumn = 'yes'
+vim.o.signcolumn = "yes"
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -48,10 +52,10 @@ vim.o.splitbelow = true
 --   See `:help lua-options`
 --   and `:help lua-options-guide`
 vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Preview substitutions live, as you type!
-vim.o.inccommand = 'split'
+vim.o.inccommand = "split"
 
 -- Show which line your cursor is on
 vim.o.cursorline = true
@@ -65,7 +69,7 @@ vim.o.scrolloff = 8
 vim.o.confirm = true
 
 -- Tab
-vim.opt.tabstop = 4                 -- number of visual spaces per TAB
-vim.opt.softtabstop = 4             -- number of spaces in tab when editing
-vim.opt.shiftwidth = 4              -- insert 4 spaces on a tab
-vim.opt.expandtab = true            -- tabs are spaces, mainly because of Python
+vim.opt.tabstop = 4 -- number of visual spaces per TAB
+vim.opt.softtabstop = 4 -- number of spaces in tab when editing
+vim.opt.shiftwidth = 4 -- insert 4 spaces on a tab
+vim.opt.expandtab = true -- tabs are spaces, mainly because of Python
