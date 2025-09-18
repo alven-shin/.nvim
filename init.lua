@@ -1,3 +1,4 @@
-require("options")
-require("colorscheme")
-require("keymap")
+require("user.options")
+require("user.colorscheme")
+require("user.keymap")
+require("user.lsp")
