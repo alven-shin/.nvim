@@ -1,5 +1,8 @@
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 
+-- mason
+require("mason").setup()
+
 -- auto-format
 local autoformat = vim.api.nvim_create_augroup("user-autoformat", {})
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -55,6 +58,7 @@ local function on_attach(client, bufnr)
   vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references", buffer = bufnr, nowait = true })
 end
 
+-- load all lsp configs from /lua/user/lsp-configs
 local lsp_configs = vim.fn.globpath(vim.fn.stdpath("config") .. "/lua/user/lsp-configs", "*.lua", true, true)
 for _, path in ipairs(lsp_configs) do
   local name = vim.fn.fnamemodify(path, ":t:r")
