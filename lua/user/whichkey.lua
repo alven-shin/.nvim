@@ -6,5 +6,6 @@ require("which-key").setup({
   spec = {
     { "<leader>g", group = "GitSigns" },
     { "<leader>gh", group = "Hunks" },
+    { "<leader>b", group = "Buffer" },
   },
 })

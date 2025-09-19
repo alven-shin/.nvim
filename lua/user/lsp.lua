@@ -1,4 +1,4 @@
-vim.opt.completeopt = { "menu", "menuone", "noselect", "preview" }
+vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 
 -- auto-format
 local autoformat = vim.api.nvim_create_augroup("user-autoformat", {})
@@ -26,7 +26,10 @@ local function on_attach(client, bufnr)
   end, { desc = "Select previous menu item", buffer = bufnr, expr = true })
   vim.keymap.set("i", "<esc>", function()
     return vim.fn.pumvisible() == 1 and "<esc>a" or "<esc>"
-  end, { desc = "Select previous menu item", buffer = bufnr, expr = true })
+  end, { desc = "Hide menu", buffer = bufnr, expr = true })
+  vim.keymap.set("i", "<cr>", function()
+    return vim.fn.pumvisible() == 1 and "<esc>a" or "<cr>"
+  end, { desc = "Confirm current entry", buffer = bufnr, expr = true })
 
   -- common lsp commands
   vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename", buffer = bufnr })
