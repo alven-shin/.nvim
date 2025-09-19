@@ -1,6 +1,6 @@
 require("user.options")
 require("user.colorscheme")
-require("user.keybinds")
+require("user.keymaps")
 require("user.lsp")
 require("user.diagnostics")
 require("user.gitsigns")

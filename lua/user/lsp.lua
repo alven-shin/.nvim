@@ -1,13 +1,13 @@
 vim.opt.completeopt = { "menu", "menuone", "noselect", "preview" }
 
--- autocomplete keybinds
-vim.keymap.set("i", "<C-space>", vim.lsp.completion.get, { desc = "Trigger autocompletion" })
-
 -- auto-format
-local autoformat = vim.api.nvim_create_augroup("autoformat", {})
+local autoformat = vim.api.nvim_create_augroup("user-autoformat", {})
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   group = autoformat,
   callback = function()
+    if vim.b.autoformat == false then
+      return
+    end
     vim.lsp.buf.format()
   end,
 })
@@ -15,6 +15,33 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 -- enable lsp servers and auto complete
 local function on_attach(client, bufnr)
   vim.lsp.completion.enable(true, client.id, bufnr)
+
+  -- autocomplete mappings
+  vim.keymap.set("i", "<C-space>", vim.lsp.completion.get, { desc = "Trigger autocompletion", buffer = bufnr })
+  vim.keymap.set("i", "<tab>", function()
+    return vim.fn.pumvisible() == 1 and "<C-n>" or "<tab>"
+  end, { desc = "Select next menu item", buffer = bufnr, expr = true })
+  vim.keymap.set("i", "<s-tab>", function()
+    return vim.fn.pumvisible() == 1 and "<C-p>" or "<s-tab>"
+  end, { desc = "Select previous menu item", buffer = bufnr, expr = true })
+  vim.keymap.set("i", "<esc>", function()
+    return vim.fn.pumvisible() == 1 and "<esc>a" or "<esc>"
+  end, { desc = "Select previous menu item", buffer = bufnr, expr = true })
+
+  -- common lsp commands
+  vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, { desc = "Rename", buffer = bufnr })
+  vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, { desc = "Code actions", buffer = bufnr })
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition", buffer = bufnr })
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration", buffer = bufnr })
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation", buffer = bufnr })
+
+  -- unmap existing gr keymaps
+  vim.keymap.del("n", "gra")
+  vim.keymap.del("n", "gri")
+  vim.keymap.del("n", "grn")
+  vim.keymap.del("n", "grr")
+
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references", buffer = bufnr })
 end
 
 local lsp_configs = vim.fn.globpath(vim.fn.stdpath("config") .. "/lua/user/lsp-configs", "*.lua", true, true)
