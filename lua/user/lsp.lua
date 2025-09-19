@@ -47,11 +47,11 @@ local function on_attach(client, bufnr)
 end
 
 -- load all lsp configs from /lua/user/lsp-configs
-local lsp_configs = vim.fn.globpath(vim.fn.stdpath("config") .. "/lua/user/lsp-configs", "*.lua", true, true)
+local lsp_configs = vim.fn.globpath(vim.fn.stdpath("config") .. "/lua/user/server-configs", "*.lua", true, true)
 for _, path in ipairs(lsp_configs) do
   local name = vim.fn.fnamemodify(path, ":t:r")
 
-  local config = require("user.lsp-configs." .. name)
+  local config = require("user.server-configs." .. name)
   config.on_attach = on_attach -- enable auto complete
 
   vim.lsp.config(name, config)
