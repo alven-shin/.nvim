@@ -9,10 +9,3 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 -- disable cmdline-window keymaps
 vim.keymap.set("", "q:", "<nop>")
 vim.keymap.set("", "q?", "<nop>")
-
-require("which-key").setup({
-  preset = "helix",
-  icons = {
-    mappings = false,
-  },
-})
