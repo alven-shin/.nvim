@@ -17,7 +17,7 @@ local function on_attach(client, bufnr)
   vim.lsp.completion.enable(true, client.id, bufnr)
 end
 
-local lsp_configs = vim.fn.globpath(vim.fn.stdpath("config") .. "/lsp-configs", "*.lua", true, true)
+local lsp_configs = vim.fn.globpath(vim.fn.stdpath("config") .. "/lua/user/lsp-configs", "*.lua", true, true)
 for _, path in ipairs(lsp_configs) do
   local name = vim.fn.fnamemodify(path, ":t:r")
 
