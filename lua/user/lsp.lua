@@ -36,12 +36,20 @@ local function on_attach(client, bufnr)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation", buffer = bufnr })
 
   -- unmap existing gr keymaps
-  vim.keymap.del("n", "gra")
-  vim.keymap.del("n", "gri")
-  vim.keymap.del("n", "grn")
-  vim.keymap.del("n", "grr")
+  pcall(function()
+    vim.keymap.del("n", "gra", { buffer = bufnr })
+  end)
+  pcall(function()
+    vim.keymap.del("n", "gri", { buffer = bufnr })
+  end)
+  pcall(function()
+    vim.keymap.del("n", "grn", { buffer = bufnr })
+  end)
+  pcall(function()
+    vim.keymap.del("n", "grr", { buffer = bufnr })
+  end)
 
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references", buffer = bufnr })
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references", buffer = bufnr, nowait = true })
 end
 
 local lsp_configs = vim.fn.globpath(vim.fn.stdpath("config") .. "/lua/user/lsp-configs", "*.lua", true, true)
