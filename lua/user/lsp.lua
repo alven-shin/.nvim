@@ -3,18 +3,6 @@ vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 -- mason
 require("mason").setup()
 
--- auto-format
-local autoformat = vim.api.nvim_create_augroup("user-autoformat", {})
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  group = autoformat,
-  callback = function()
-    if vim.b.autoformat == false then
-      return
-    end
-    vim.lsp.buf.format()
-  end,
-})
-
 -- enable lsp servers and auto complete
 local function on_attach(client, bufnr)
   vim.lsp.completion.enable(true, client.id, bufnr)
@@ -69,3 +57,35 @@ for _, path in ipairs(lsp_configs) do
   vim.lsp.config(name, config)
   vim.lsp.enable(name)
 end
+
+-- conform
+require("conform").setup({
+  format_on_save = function(bufnr)
+    -- Disable with a global or buffer-local variable
+    if vim.g.autoformat == false or vim.b[bufnr].autoformat == false then
+      return
+    end
+    return { timeout_ms = 500, lsp_format = "fallback" }
+  end,
+  formatters_by_ft = {
+    lua = { "stylua" },
+    sh = { "shfmt" },
+    swift = { "swiftformat" },
+    python = { "ruff_format", "ruff_organize_imports" },
+    java = { "clang-format" },
+
+    -- webdev
+    javascript = { "prettierd" },
+    javascriptreact = { "prettierd" },
+    typescript = { "prettierd" },
+    typescriptreact = { "prettierd" },
+    json = { "prettierd" },
+    jsonc = { "prettierd" },
+    yaml = { "prettierd" },
+    markdown = { "prettierd" },
+    css = { "prettierd" },
+    html = { "prettierd" },
+    svelte = { "prettierd" },
+    vue = { "prettierd" },
+  },
+})
