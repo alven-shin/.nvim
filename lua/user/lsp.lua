@@ -3,6 +3,15 @@ vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 -- mason
 require("mason").setup()
 
+-- load all lsp configs from /lua/user/lsp-configs
+-- local lsp_configs = vim.fn.globpath(vim.fn.stdpath("config") .. "/after/lsp", "*.lua", true, true)
+-- for _, path in ipairs(lsp_configs) do
+--   local name = vim.fn.fnamemodify(path, ":t:r")
+--   vim.lsp.enable(name)
+-- end
+vim.lsp.enable("luals")
+vim.lsp.enable("clangd")
+
 -- enable lsp servers and auto complete
 -- this is mapped outside of the autocommand because <c-space> does something weird in insert mode
 vim.keymap.set("i", "<c-space>", vim.lsp.completion.get, { desc = "Trigger autocompletion" })
@@ -51,45 +60,4 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references", buffer = bufnr, nowait = true })
   end,
-})
-
--- load all lsp configs from /lua/user/lsp-configs
--- local lsp_configs = vim.fn.globpath(vim.fn.stdpath("config") .. "/after/lsp", "*.lua", true, true)
--- for _, path in ipairs(lsp_configs) do
---   local name = vim.fn.fnamemodify(path, ":t:r")
---   vim.lsp.enable(name)
--- end
-vim.lsp.enable("luals")
-vim.lsp.enable("clangd")
-
--- conform
-require("conform").setup({
-  format_on_save = function(bufnr)
-    -- Disable with a global or buffer-local variable
-    if vim.g.autoformat == false or vim.b[bufnr].autoformat == false then
-      return
-    end
-    return { timeout_ms = 500, lsp_format = "fallback" }
-  end,
-  formatters_by_ft = {
-    lua = { "stylua" },
-    sh = { "shfmt" },
-    swift = { "swiftformat" },
-    python = { "ruff_format", "ruff_organize_imports" },
-    java = { "clang-format" },
-
-    -- webdev
-    javascript = { "prettierd" },
-    javascriptreact = { "prettierd" },
-    typescript = { "prettierd" },
-    typescriptreact = { "prettierd" },
-    json = { "prettierd" },
-    jsonc = { "prettierd" },
-    yaml = { "prettierd" },
-    markdown = { "prettierd" },
-    css = { "prettierd" },
-    html = { "prettierd" },
-    svelte = { "prettierd" },
-    vue = { "prettierd" },
-  },
 })
