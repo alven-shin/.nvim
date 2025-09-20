@@ -4,11 +4,12 @@ vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 require("mason").setup()
 
 -- enable lsp servers and auto complete
+vim.keymap.set("i", "<c-space>", vim.lsp.completion.get, { desc = "Trigger autocompletion" })
+
 local function on_attach(client, bufnr)
   vim.lsp.completion.enable(true, client.id, bufnr)
 
   -- autocomplete mappings
-  vim.keymap.set("i", "<C-space>", vim.lsp.completion.get, { desc = "Trigger autocompletion", buffer = bufnr })
   vim.keymap.set("i", "<tab>", function()
     return vim.fn.pumvisible() == 1 and "<C-n>" or "<tab>"
   end, { desc = "Select next menu item", buffer = bufnr, expr = true })
