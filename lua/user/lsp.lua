@@ -11,6 +11,8 @@ require("mason").setup()
 -- end
 vim.lsp.enable("luals")
 vim.lsp.enable("clangd")
+vim.lsp.enable("basedpyright")
+vim.lsp.enable("ruff")
 
 -- diagnostic popup
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostic" })
