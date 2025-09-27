@@ -18,3 +18,5 @@ update-plugins:
     git subtree pull --prefix pack/plugins/start/nvim-treesitter git@github.com:nvim-treesitter/nvim-treesitter.git main --squash
     git subtree pull --prefix pack/plugins/start/snacks.nvim git@github.com:folke/snacks.nvim.git main --squash
     git subtree pull --prefix pack/plugins/start/todo-comments.nvim git@github.com:folke/todo-comments.nvim.git main --squash
+    git subtree pull --prefix pack/plugins/start/mini.pairs git@github.com:nvim-mini/mini.pairs.git main --squash
+    git subtree pull --prefix pack/plugins/start/nvim-ts-autotag git@github.com:windwp/nvim-ts-autotag.git main --squash

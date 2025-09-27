@@ -27,4 +27,6 @@ require("conform").setup({
     svelte = { "prettierd" },
     vue = { "prettierd" },
   },
+  notify_on_error = false,
+  notify_no_formatters = false,
 })
