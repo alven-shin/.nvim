@@ -11,6 +11,7 @@ require("user.whichkey")
 require("user.bufferline")
 require("user.undotree")
 require("user.oil")
+require("user.snacks")
 
 -- NOTE: things to do when adding a new language config:
 -- - add lsp config to /after/lsp
