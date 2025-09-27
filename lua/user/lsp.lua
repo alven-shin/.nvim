@@ -13,6 +13,14 @@ require("mason").setup()
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("clangd")
 vim.lsp.enable("rust_analyzer")
+vim.lsp.enable("taplo")
+vim.lsp.enable("tinymist")
+vim.lsp.enable("jdtls")
+vim.lsp.enable("omnisharp")
+
+-- go
+vim.lsp.enable("gopls")
+vim.lsp.enable("golangci_lint_ls")
 
 -- python
 vim.lsp.enable("basedpyright")
