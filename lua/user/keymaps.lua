@@ -67,7 +67,7 @@ vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle comments", remap = true
 vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle comments", remap = true })
 
 -- netrw
-vim.keymap.set("n", "<leader>e", "<cmd>Explore<cr>", { desc = "Netrw" })
+vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>", { desc = "Oil" })
 
 -- diagnostic
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostic" })
