@@ -7,5 +7,6 @@ require("which-key").setup({
     { "<leader>g", group = "GitSigns" },
     { "<leader>gh", group = "Hunks" },
     { "<leader>b", group = "Buffer" },
+    { "<leader>f", group = "Find (Telescope)" },
   },
 })
