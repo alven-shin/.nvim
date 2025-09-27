@@ -9,11 +9,19 @@ require("mason").setup()
 --   local name = vim.fn.fnamemodify(path, ":t:r")
 --   vim.lsp.enable(name)
 -- end
-vim.lsp.enable("luals")
+
+vim.lsp.enable("lua_ls")
 vim.lsp.enable("clangd")
+vim.lsp.enable("rust_analyzer")
+
+-- python
 vim.lsp.enable("basedpyright")
 vim.lsp.enable("ruff")
-vim.lsp.enable("rust_analyzer")
+
+-- web
+vim.lsp.enable("vtsls")
+vim.lsp.enable("tailwindcss")
+vim.lsp.enable("eslint")
 
 -- diagnostic popup
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostic" })

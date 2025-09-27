@@ -11,6 +11,10 @@
 --- - clangd relies on a [JSON compilation database](https://clang.llvm.org/docs/JSONCompilationDatabase.html)
 ---   specified as compile_commands.json, see https://clangd.llvm.org/installation#compile_commandsjson
 
+---@class ClangdInitializeResult: lsp.InitializeResult
+---@field offsetEncoding? string
+
+---@type vim.lsp.Config
 return {
   cmd = { "clangd" },
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
@@ -24,4 +28,10 @@ return {
     },
     offsetEncoding = { "utf-8", "utf-16" },
   },
+  ---@param init_result ClangdInitializeResult
+  on_init = function(client, init_result)
+    if init_result.offsetEncoding then
+      client.offset_encoding = init_result.offsetEncoding
+    end
+  end,
 }
