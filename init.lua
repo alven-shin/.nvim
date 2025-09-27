@@ -12,6 +12,7 @@ require("user.bufferline")
 require("user.undotree")
 require("user.oil")
 require("user.snacks")
+require("user.todo")
 
 -- NOTE: things to do when adding a new language config:
 -- - add lsp config to /after/lsp

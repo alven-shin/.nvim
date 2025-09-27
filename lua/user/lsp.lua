@@ -12,6 +12,9 @@ require("mason").setup()
 vim.lsp.enable("luals")
 vim.lsp.enable("clangd")
 
+-- diagnostic popup
+vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostic" })
+
 -- enable lsp servers and auto complete
 -- this is mapped outside of the autocommand because <c-space> does something weird in insert mode
 vim.keymap.set("i", "<c-space>", vim.lsp.completion.get, { desc = "Trigger autocompletion" })

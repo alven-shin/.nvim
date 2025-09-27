@@ -5,3 +5,5 @@ require("oil").setup({
     ["<s-h>"] = { "actions.toggle_hidden", mode = "n" },
   },
 })
+
+vim.keymap.set("n", "<leader>e", "<cmd>Oil<cr>", { desc = "Oil" })

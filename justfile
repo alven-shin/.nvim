@@ -17,3 +17,4 @@ update-plugins:
     git subtree pull --prefix pack/plugins/start/telescope.nvim git@github.com:nvim-telescope/telescope.nvim.git master --squash
     git subtree pull --prefix pack/plugins/start/nvim-treesitter git@github.com:nvim-treesitter/nvim-treesitter.git main --squash
     git subtree pull --prefix pack/plugins/start/snacks.nvim git@github.com:folke/snacks.nvim.git main --squash
+    git subtree pull --prefix pack/plugins/start/todo-comments.nvim git@github.com:folke/todo-comments.nvim.git main --squash
