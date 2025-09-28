@@ -27,6 +27,8 @@ vim.lsp.enable("basedpyright")
 vim.lsp.enable("ruff")
 
 -- web
+vim.lsp.enable("htmls")
+vim.lsp.enable("emmet_language_server")
 vim.lsp.enable("vtsls")
 vim.lsp.enable("tailwindcss")
 vim.lsp.enable("eslint")
@@ -40,16 +42,16 @@ vim.keymap.set("i", "<c-space>", vim.lsp.completion.get, { desc = "Trigger autoc
 
 -- autocomplete mappings
 vim.keymap.set("i", "<tab>", function()
-  return vim.fn.pumvisible() == 1 and "<C-n>" or "<tab>"
+  return vim.fn.pumvisible() == 1 and "<c-n>" or "<tab>"
 end, { desc = "Select next menu item", expr = true })
 vim.keymap.set("i", "<s-tab>", function()
-  return vim.fn.pumvisible() == 1 and "<C-p>" or "<s-tab>"
+  return vim.fn.pumvisible() == 1 and "<c-p>" or "<s-tab>"
 end, { desc = "Select previous menu item", expr = true })
 -- vim.keymap.set("i", "<esc>", function()
 --   return vim.fn.pumvisible() == 1 and "<esc>a" or "<esc>"
 -- end, { desc = "Hide menu", expr = true })
 vim.keymap.set("i", "<cr>", function()
-  return vim.fn.pumvisible() == 1 and "<esc>a" or "<cr>"
+  return vim.fn.pumvisible() == 1 and "<c-y>" or "<cr>"
 end, { desc = "Confirm current entry", expr = true })
 
 -- common lsp commands
