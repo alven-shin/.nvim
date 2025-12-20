@@ -68,5 +68,14 @@ return {
       local cmd_func, cmd_name, cmd_desc = create_tinymist_command(command, client, bufnr)
       vim.api.nvim_buf_create_user_command(bufnr, "Lsp" .. cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
     end
+
+    -- typst preview command
+    vim.api.nvim_buf_create_user_command(bufnr, "LspTinymistStartDefaultPreview", function()
+      client:exec_cmd({
+        title = "startDefaultPreview",
+        command = "tinymist.startDefaultPreview",
+        arguments = { vim.api.nvim_buf_get_name(bufnr) },
+      }, { bufnr = bufnr })
+    end, { desc = "Start Typst Preview" })
   end,
 }
