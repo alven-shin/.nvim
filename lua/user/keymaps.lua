@@ -66,3 +66,11 @@ vim.keymap.set("n", "U", "<c-r>", { desc = "Redo" })
 -- comments
 vim.keymap.set("n", "<leader>/", "gcc", { desc = "Toggle comments", remap = true })
 vim.keymap.set("v", "<leader>/", "gc", { desc = "Toggle comments", remap = true })
+
+-- flash.nvim
+vim.keymap.set({ "n", "x", "o" }, "s", function()
+  require("flash").jump()
+end, { desc = "Flash" })
+vim.keymap.set({ "n", "x", "o" }, "S", function()
+  require("flash").treesitter()
+end, { desc = "Flash Treesitter" })

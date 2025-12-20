@@ -18,6 +18,5 @@ require("user.autopair")
 -- NOTE: things to do when adding a new language config:
 -- - add lsp config to /after/lsp
 -- - add server to /lua/user/lsp.lua
--- - add language to treesitter ensure_installed
 -- - configure conform and lint if needed
 -- - configure indents in /after/ftplugin if needed
