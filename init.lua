@@ -14,6 +14,7 @@ require("user.oil")
 require("user.snacks")
 require("user.todo")
 require("user.autopair")
+require("user.ai")
 
 -- NOTE: things to do when adding a new language config:
 -- - add lsp config to /after/lsp
