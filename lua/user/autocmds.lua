@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("BufWinLeave", {
   pattern = "*",
   callback = function()
-    if vim.bo.filetype ~= "" and vim.bo.buftype == "" then
+    if vim.bo.filetype ~= "" and vim.bo.filetype ~= "gitcommit" and vim.bo.buftype == "" then
       vim.cmd("mkview")
     end
   end,
@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd("BufWinLeave", {
 vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = "*",
   callback = function()
-    if vim.bo.filetype ~= "" and vim.bo.buftype == "" then
+    if vim.bo.filetype ~= "" and vim.bo.filetype ~= "gitcommit" and vim.bo.buftype == "" then
       vim.cmd("silent! loadview")
     end
   end,
