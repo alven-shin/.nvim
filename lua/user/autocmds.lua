@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = "*",
   callback = function()
     if vim.bo.filetype ~= "" and vim.bo.buftype == "" then
-      vim.cmd("loadview")
+      vim.cmd("silent! loadview")
     end
   end,
 })
