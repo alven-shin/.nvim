@@ -2,6 +2,13 @@
 vim.api.nvim_create_autocmd("CmdwinEnter", {
   callback = function()
     vim.cmd("quit")
-    -- vim.api.nvim_buf_delete(0, { force = true })
+  end,
+})
+
+-- q to quit quickfix
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.keymap.set("n", "q", "<cmd>quit<CR>", { buffer = true })
   end,
 })
