@@ -1,31 +1,37 @@
-local config = require('nvim-treesitter.config')
+require "nvim-treesitter.highlight" -- yes, this is necessary to set the hlmap
+local configs = require "nvim-treesitter.configs"
+local parsers = require "nvim-treesitter.parsers"
 local ts = vim.treesitter
 
 local function check_assertions(file)
   local buf = vim.fn.bufadd(file)
   vim.fn.bufload(file)
-  local ft = vim.bo[buf].filetype
-  local lang = vim.treesitter.language.get_lang(ft) or ft
-  local assertions = vim.fn.json_decode(vim.fn.system({
-    os.getenv('HLASSERT'),
-    '-p',
-    config.get_install_dir('parser') .. '/' .. lang .. '.so',
-    '-s',
-    file,
-  }))
-  local parser = ts.get_parser(buf, lang)
+  local lang = parsers.get_buf_lang(buf)
+  assert.same(
+    1,
+    vim.fn.executable "highlight-assertions",
+    '"highlight-assertions" not executable!'
+      .. ' Get it via "cargo install --git https://github.com/theHamsta/highlight-assertions"'
+  )
+  local assertions = vim.fn.json_decode(
+    vim.fn.system(
+      "highlight-assertions -p '" .. configs.get_parser_install_dir() .. "/" .. lang .. ".so'" .. " -s '" .. file .. "'"
+    )
+  )
+  local parser = parsers.get_parser(buf, lang)
 
+  local self = parser
   local top_level_root = parser:parse(true)[1]:root()
 
   for _, assertion in ipairs(assertions) do
     local row = assertion.position.row
     local col = assertion.position.column
 
-    local neg_assert = assertion.expected_capture_name:match('^!')
+    local neg_assert = assertion.expected_capture_name:match "^!"
     assertion.expected_capture_name = neg_assert and assertion.expected_capture_name:sub(2)
       or assertion.expected_capture_name
     local found = false
-    parser:for_each_tree(function(tstree, tree)
+    self:for_each_tree(function(tstree, tree)
       if not tstree then
         return
       end
@@ -38,15 +44,15 @@ local function check_assertions(file)
       if assertion.expected_capture_name == tree:lang() then
         found = true
       end
-    end)
+    end, true)
     if neg_assert then
       assert.False(
         found,
-        'Error in '
+        "Error in at "
           .. file
-          .. ':'
+          .. ":"
           .. (row + 1)
-          .. ':'
+          .. ":"
           .. (col + 1)
           .. ': expected "'
           .. assertion.expected_capture_name
@@ -55,11 +61,11 @@ local function check_assertions(file)
     else
       assert.True(
         found,
-        'Error in '
+        "Error in at "
           .. file
-          .. ':'
+          .. ":"
           .. (row + 1)
-          .. ':'
+          .. ":"
           .. (col + 1)
           .. ': expected "'
           .. assertion.expected_capture_name
@@ -69,8 +75,8 @@ local function check_assertions(file)
   end
 end
 
-describe('injections', function()
-  local files = vim.fn.split(vim.fn.glob('tests/query/injections/**/*.*'))
+describe("injections", function()
+  local files = vim.fn.split(vim.fn.glob "tests/query/injections/**/*.*")
   for _, file in ipairs(files) do
     it(file, function()
       check_assertions(file)
