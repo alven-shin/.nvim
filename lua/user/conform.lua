@@ -12,6 +12,7 @@ require("conform").setup({
     swift = { "swiftformat" },
     python = { "ruff_format", "ruff_organize_imports" },
     java = { "clang-format" },
+    typst = { "typstyle" },
 
     -- webdev
     javascript = { "prettierd" },
