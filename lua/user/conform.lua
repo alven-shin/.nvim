@@ -13,6 +13,7 @@ require("conform").setup({
     python = { "ruff_format", "ruff_organize_imports" },
     java = { "clang-format" },
     typst = { "typstyle" },
+    kdl = { "kdlfmt" },
 
     -- webdev
     javascript = { "prettierd" },
