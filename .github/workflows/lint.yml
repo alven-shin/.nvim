@@ -1,50 +1,51 @@
-name: Lint
+name: Linting and style checking
 
 on:
-  push:
-    branches:
-      - "main"
   pull_request:
     branches:
-      - "main"
-  workflow_dispatch:
+      - "master"
 
 jobs:
-  lua:
-    name: Lint Lua files
+  luacheck:
+    name: Luacheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
 
-      - name: Format
+      - name: Prepare
         run: |
-          make formatlua
-          git diff --exit-code
+          sudo apt-get update
+          sudo apt-get install luarocks -y
+          sudo luarocks install luacheck
+
+      - name: Run Luacheck
+        run: luacheck .
+
+  stylua:
+    name: StyLua
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint with stylua
+        uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check .
+
+  format-queries:
+    name: Lint queries
+    runs-on: ubuntu-latest
+    env:
+      NVIM_TAG: stable
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare
+        run: |
+          bash ./scripts/ci-install.sh
 
       - name: Lint
-        run: make checklua
-
-  queries:
-    name: Lint query files
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Format
         run: |
-          make formatquery
-          git diff --exit-code
-
-      - name: Lint
-        run: make lintquery
-
-  readme:
-    name: Lint docs
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Check SUPPORTED_LANGUAGES
-        run: |
-          make docs
+          nvim --headless -c "TSInstallSync query" -c "q"
+          nvim -l scripts/format-queries.lua
           git diff --exit-code

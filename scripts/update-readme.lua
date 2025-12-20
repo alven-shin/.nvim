@@ -1,85 +1,59 @@
 #!/usr/bin/env -S nvim -l
-vim.opt.runtimepath:append('.')
-local util = require('nvim-treesitter.util')
-local parsers = require('nvim-treesitter.parsers')
-local tiers = require('nvim-treesitter.config').tiers
 
-local sorted_parsers = {} ---@type { name: string, parser: ParserInfo }[]
+---@class Parser
+---@field name string
+---@field parser ParserInfo
+
+local parsers = require("nvim-treesitter.parsers").get_parser_configs()
+local sorted_parsers = {}
+
 for k, v in pairs(parsers) do
   table.insert(sorted_parsers, { name = k, parser = v })
 end
+
+---@param a Parser
+---@param b Parser
 table.sort(sorted_parsers, function(a, b)
   return a.name < b.name
 end)
 
-local generated_text = [[
-Language | Tier | Queries | Node | Maintainer
--------- |:----:|:-------:|:----:| ----------
-]]
-local footnotes = ''
+local generated_text = ""
 
+---@param v Parser
 for _, v in ipairs(sorted_parsers) do
-  local p = v.parser
-  -- language
-  if p.install_info then
+  local link = "[" .. (v.parser.readme_name or v.name) .. "](" .. v.parser.install_info.url .. ")"
+
+  if v.parser.maintainers then
     generated_text = generated_text
-      .. '['
-      .. v.name
-      .. ']('
-      .. p.install_info.url
-      .. ')'
-      .. (p.readme_note and '[^' .. v.name .. ']' or '')
-      .. ' | '
+      .. "- [x] "
+      .. link
+      .. " ("
+      .. (v.parser.experimental and "experimental, " or "")
+      .. "maintained by "
+      .. table.concat(v.parser.maintainers, ", ")
+      .. ")\n"
   else
-    generated_text = generated_text
-      .. v.name
-      .. ' (queries only)'
-      .. (p.readme_note and '[^' .. v.name .. ']' or '')
-      .. ' | '
+    generated_text = generated_text .. "- [ ] " .. link .. (v.parser.experimental and " (experimental)" or "") .. "\n"
   end
-
-  if p.readme_note then
-    footnotes = footnotes .. '[^' .. v.name .. ']: ' .. p.readme_note .. '\n'
-  end
-
-  -- tier
-  generated_text = generated_text .. (p.tier and tiers[p.tier] or '') .. ' | '
-
-  -- queries
-  generated_text = generated_text
-    .. '`'
-    .. (vim.uv.fs_stat('runtime/queries/' .. v.name .. '/highlights.scm') and 'H' or ' ')
-    .. (vim.uv.fs_stat('runtime/queries/' .. v.name .. '/folds.scm') and 'F' or ' ')
-    .. (vim.uv.fs_stat('runtime/queries/' .. v.name .. '/indents.scm') and 'I' or ' ')
-    .. (vim.uv.fs_stat('runtime/queries/' .. v.name .. '/injections.scm') and 'J' or ' ')
-    .. (vim.uv.fs_stat('runtime/queries/' .. v.name .. '/locals.scm') and 'L' or ' ')
-    .. '` | '
-
-  -- node
-  generated_text = generated_text
-    .. (p.install_info and p.install_info.generate_from_json == false and 'X' or ' ')
-    .. ' | '
-
-  -- Maintainer
-  generated_text = generated_text
-    .. (p.maintainers and table.concat(p.maintainers, ', ') or '')
-    .. '\n'
 end
-generated_text = generated_text .. footnotes
 
-local readme = 'SUPPORTED_LANGUAGES.md'
-local readme_text = util.read_file(readme)
+print(generated_text)
+print "\n"
+
+local readme_text = table.concat(vim.fn.readfile "README.md", "\n")
 
 local new_readme_text = string.gsub(
   readme_text,
-  '<!%-%-parserinfo%-%->.*<!%-%-parserinfo%-%->',
-  '<!--parserinfo-->\n' .. generated_text .. '<!--parserinfo-->'
+  "<!%-%-parserinfo%-%->.*<!%-%-parserinfo%-%->",
+  "<!--parserinfo-->\n" .. generated_text .. "<!--parserinfo-->"
 )
-
-util.write_file(readme, new_readme_text)
+vim.fn.writefile(vim.fn.split(new_readme_text, "\n"), "README.md")
 
 if string.find(readme_text, generated_text, 1, true) then
-  print(readme .. ' is up-to-date\n')
+  print "README.md is up-to-date!"
+  vim.cmd "q"
 else
-  print('New ' .. readme .. ' was written\n')
+  print "New README.md was written. Please commit that change! Old text was: "
+  print(string.sub(readme_text, string.find(readme_text, "<!%-%-parserinfo%-%->.*<!%-%-parserinfo%-%->")))
+  vim.cmd "cq"
 end
