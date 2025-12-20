@@ -6,10 +6,6 @@
 --  See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
--- disable cmdline-window keymaps
-vim.keymap.set("", "q:", "<nop>")
-vim.keymap.set("", "q?", "<nop>")
-
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --

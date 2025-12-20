@@ -1,6 +1,7 @@
 require("user.options")
 require("user.colorscheme")
 require("user.keymaps")
+require("user.autocmds")
 require("user.treesitter")
 require("user.lsp") -- mason setup is here too
 require("user.conform")
