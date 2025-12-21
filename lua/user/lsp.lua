@@ -33,6 +33,7 @@ vim.lsp.enable("emmet_language_server")
 vim.lsp.enable("vtsls")
 vim.lsp.enable("tailwindcss")
 vim.lsp.enable("eslint")
+vim.lsp.enable("cssls")
 
 -- diagnostic popup
 vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Show diagnostic" })
