@@ -17,6 +17,7 @@ vim.lsp.enable("taplo")
 vim.lsp.enable("tinymist")
 vim.lsp.enable("jdtls")
 vim.lsp.enable("omnisharp")
+vim.lsp.enable("dockerls")
 
 -- go
 vim.lsp.enable("gopls")
