@@ -1,7 +1,8 @@
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 
--- mason
+-- mason and fidget
 require("mason").setup()
+require("fidget").setup({})
 
 -- load all lsp configs from /lua/user/lsp-configs
 -- local lsp_configs = vim.fn.globpath(vim.fn.stdpath("config") .. "/after/lsp", "*.lua", true, true)
@@ -77,6 +78,7 @@ pcall(function()
   vim.keymap.del("n", "grr")
 end)
 
+-- create single gr keymap
 vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references", nowait = true })
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -84,6 +86,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local client_id = args.data.client_id
     local bufnr = args.buf
 
+    -- enable completion
     vim.lsp.completion.enable(true, client_id, bufnr)
   end,
 })
+
+-- Restart LSP for current buffer only
+vim.api.nvim_create_user_command("LspRestart", function()
+  local buf = vim.api.nvim_get_current_buf()
+
+  -- Get clients attached to current buffer
+  local clients = vim.lsp.get_clients({ bufnr = buf })
+
+  -- Stop each client
+  for _, client in ipairs(clients) do
+    client:stop()
+  end
+
+  -- Reload buffer to trigger LSP reattach
+  vim.cmd("edit")
+end, {})
+
+-- LSP status
+vim.api.nvim_create_user_command("LspStatus", function()
+  vim.cmd("checkhealth vim.lsp")
+end, {})

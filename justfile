@@ -22,3 +22,4 @@ update-plugins:
     git subtree pull --prefix pack/plugins/start/nvim-ts-autotag git@github.com:windwp/nvim-ts-autotag.git main --squash
     git subtree pull --prefix pack/plugins/start/flash.nvim git@github.com:folke/flash.nvim.git main --squash
     git subtree pull --prefix pack/plugins/start/supermaven-nvim git@github.com:supermaven-inc/supermaven-nvim.git main --squash
+    git subtree pull --prefix pack/plugins/start/fidget.nvim git@github.com:j-hui/fidget.nvim.git main --squash
