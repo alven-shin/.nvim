@@ -82,6 +82,22 @@ end)
 -- create single gr keymap
 vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references", nowait = true })
 
+-- display diagnostic counts in statusline
+function _G.diag_counts()
+  local parts = {}
+  local function add(label, severity)
+    local n = #vim.diagnostic.get(0, { severity = severity })
+    if n > 0 then
+      parts[#parts + 1] = label .. n
+    end
+  end
+  add("E:", vim.diagnostic.severity.ERROR)
+  add("W:", vim.diagnostic.severity.WARN)
+  add("I:", vim.diagnostic.severity.INFO)
+  add("H:", vim.diagnostic.severity.HINT)
+  return table.concat(parts, " ")
+end
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client_id = args.data.client_id
@@ -89,6 +105,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- enable completion
     vim.lsp.completion.enable(true, client_id, bufnr)
+
+    -- set custom statusline: same as default but with diagnostic counts
+    vim.opt_local.statusline = "%<%f %h%w%m%r%=%{%v:lua.diag_counts()%}   %-14.(%l,%c%V%) %P"
   end,
 })
 
