@@ -8,5 +8,6 @@ require("which-key").setup({
     { "<leader>gh", group = "Hunks" },
     { "<leader>b", group = "Buffer" },
     { "<leader>f", group = "Find (Telescope)" },
+    { "<leader>s", group = "Search (Telescope)", proxy = "<leader>f" },
   },
 })
