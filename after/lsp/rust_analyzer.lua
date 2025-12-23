@@ -136,9 +136,21 @@ return {
       init_params.initializationOptions = config.settings["rust-analyzer"]
     end
   end,
-  on_attach = function(_, bufnr)
+  on_attach = function(client, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, "LspCargoReload", function()
       reload_workspace(bufnr)
     end, { desc = "Reload current cargo workspace" })
+
+    vim.api.nvim_buf_create_user_command(bufnr, "LspOpenDocs", function()
+      client:request(
+        "experimental/externalDocs",
+        vim.lsp.util.make_position_params(0, client.offset_encoding or "utf-8"),
+        function(_, url)
+          if url then
+            vim.ui.open(url)
+          end
+        end
+      )
+    end, { desc = "Open Docs" })
   end,
 }
