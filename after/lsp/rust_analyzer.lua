@@ -72,6 +72,11 @@ return {
         },
       },
       diagnostics = { disabled = { "proc-macro-disabled" } },
+      workspace = {
+        symbol = {
+          search = { kind = "all_symbols", scope = "workspace" },
+        },
+      },
     },
   },
   root_dir = function(bufnr, on_dir)
