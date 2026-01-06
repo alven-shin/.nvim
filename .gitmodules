@@ -1,0 +1,58 @@
+[submodule "pack/plugins/start/everforest-nvim"]
+	path = pack/plugins/start/everforest-nvim
+	url = git@github.com:neanias/everforest-nvim.git
+[submodule "pack/plugins/start/bufferline.nvim"]
+	path = pack/plugins/start/bufferline.nvim
+	url = git@github.com:akinsho/bufferline.nvim.git
+[submodule "pack/plugins/start/rcd.nvim"]
+	path = pack/plugins/start/rcd.nvim
+	url = git@github.com:alven-shin/rcd.nvim.git
+[submodule "pack/plugins/start/which-key.nvim"]
+	path = pack/plugins/start/which-key.nvim
+	url = git@github.com:folke/which-key.nvim.git
+[submodule "pack/plugins/start/gitsigns.nvim"]
+	path = pack/plugins/start/gitsigns.nvim
+	url = git@github.com:lewis6991/gitsigns.nvim.git
+[submodule "pack/plugins/start/mason.nvim"]
+	path = pack/plugins/start/mason.nvim
+	url = git@github.com:mason-org/mason.nvim.git
+[submodule "pack/plugins/start/conform.nvim"]
+	path = pack/plugins/start/conform.nvim
+	url = git@github.com:stevearc/conform.nvim.git
+[submodule "pack/plugins/start/undotree"]
+	path = pack/plugins/start/undotree
+	url = git@github.com:mbbill/undotree.git
+[submodule "pack/plugins/start/oil.nvim"]
+	path = pack/plugins/start/oil.nvim
+	url = git@github.com:stevearc/oil.nvim.git
+[submodule "pack/plugins/start/plenary.nvim"]
+	path = pack/plugins/start/plenary.nvim
+	url = git@github.com:nvim-lua/plenary.nvim.git
+[submodule "pack/plugins/start/telescope.nvim"]
+	path = pack/plugins/start/telescope.nvim
+	url = git@github.com:nvim-telescope/telescope.nvim.git
+[submodule "pack/plugins/start/snacks.nvim"]
+	path = pack/plugins/start/snacks.nvim
+	url = git@github.com:folke/snacks.nvim.git
+[submodule "pack/plugins/start/todo-comments.nvim"]
+	path = pack/plugins/start/todo-comments.nvim
+	url = git@github.com:folke/todo-comments.nvim.git
+[submodule "pack/plugins/start/mini.pairs"]
+	path = pack/plugins/start/mini.pairs
+	url = git@github.com:nvim-mini/mini.pairs.git
+[submodule "pack/plugins/start/nvim-ts-autotag"]
+	path = pack/plugins/start/nvim-ts-autotag
+	url = git@github.com:windwp/nvim-ts-autotag.git
+[submodule "pack/plugins/start/flash.nvim"]
+	path = pack/plugins/start/flash.nvim
+	url = git@github.com:folke/flash.nvim.git
+[submodule "pack/plugins/start/supermaven-nvim"]
+	path = pack/plugins/start/supermaven-nvim
+	url = git@github.com:supermaven-inc/supermaven-nvim.git
+[submodule "pack/plugins/start/fidget.nvim"]
+	path = pack/plugins/start/fidget.nvim
+	url = git@github.com:j-hui/fidget.nvim.git
+[submodule "pack/plugins/start/nvim-treesitter"]
+	path = pack/plugins/start/nvim-treesitter
+	url = git@github.com:nvim-treesitter/nvim-treesitter.git
+	branch = master
