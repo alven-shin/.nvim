@@ -14,6 +14,7 @@ require("conform").setup({
     java = { "clang-format" },
     typst = { "typstyle" },
     kdl = { "kdlfmt" },
+    fish = { "fish_indent" },
 
     -- webdev
     javascript = { "prettierd" },

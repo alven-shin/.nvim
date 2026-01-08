@@ -25,6 +25,7 @@ vim.lsp.enable("jdtls")
 -- vim.lsp.enable("omnisharp")
 vim.lsp.enable("dockerls")
 vim.lsp.enable("wgsl_analyzer")
+vim.lsp.enable("fish_lsp")
 
 -- go
 vim.lsp.enable("gopls")
