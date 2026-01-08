@@ -56,3 +56,6 @@
 	path = pack/plugins/start/nvim-treesitter
 	url = git@github.com:nvim-treesitter/nvim-treesitter.git
 	branch = master
+[submodule "pack/plugins/start/roslyn.nvim"]
+	path = pack/plugins/start/roslyn.nvim
+	url = git@github.com:seblyng/roslyn.nvim.git

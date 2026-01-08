@@ -1,7 +1,12 @@
 vim.opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 
 -- mason and fidget
-require("mason").setup()
+require("mason").setup({
+  registries = {
+    "github:mason-org/mason-registry",
+    "github:Crashdummyy/mason-registry",
+  },
+})
 require("fidget").setup({})
 
 -- load all lsp configs from /lua/user/lsp-configs
@@ -17,7 +22,7 @@ vim.lsp.enable("rust_analyzer")
 vim.lsp.enable("taplo")
 vim.lsp.enable("tinymist")
 vim.lsp.enable("jdtls")
-vim.lsp.enable("omnisharp")
+-- vim.lsp.enable("omnisharp")
 vim.lsp.enable("dockerls")
 vim.lsp.enable("wgsl_analyzer")
 
