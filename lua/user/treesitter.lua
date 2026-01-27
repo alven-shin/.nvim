@@ -1,3 +1,13 @@
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.dafny = {
+  install_info = {
+    url = "https://github.com/pstuifzand/treesitter-dafny",
+    files = { "src/parser.c" },
+    branch = "main",
+  },
+  filetype = "dafny",
+}
+
 local treesitter = require("nvim-treesitter.configs")
 
 ---@diagnostic disable-next-line: missing-fields
