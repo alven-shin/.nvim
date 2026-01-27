@@ -27,6 +27,7 @@ vim.lsp.enable("dockerls")
 vim.lsp.enable("wgsl_analyzer")
 vim.lsp.enable("fish_lsp")
 vim.lsp.enable("dafny")
+vim.lsp.enable("hls")
 
 -- go
 vim.lsp.enable("gopls")
