@@ -28,6 +28,7 @@ vim.lsp.enable("wgsl_analyzer")
 vim.lsp.enable("fish_lsp")
 vim.lsp.enable("dafny")
 vim.lsp.enable("hls")
+vim.lsp.enable("nushell")
 
 -- go
 vim.lsp.enable("gopls")
