@@ -27,6 +27,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Stay in indent mode
+vim.keymap.set("n", ">", ">>")
+vim.keymap.set("n", "<", "<<")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
