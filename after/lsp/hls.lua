@@ -21,6 +21,9 @@ return {
     haskell = {
       formattingProvider = "ormolu",
       cabalFormattingProvider = "cabal-fmt",
+      plugin = {
+        rename = { config = { crossModule = true } },
+      },
     },
   },
 }
